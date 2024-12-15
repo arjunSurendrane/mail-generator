@@ -6,6 +6,7 @@ from langchain_core.exceptions import OutputParserException
 
 load_dotenv()
 
+# llm chain function
 class Chain:
     def __init__(self):
         self.llm = ChatGroq(
