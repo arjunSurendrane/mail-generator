@@ -6,6 +6,8 @@ from chains import Chain
 from utils import clean_text
 from middleware.auth_middleware import auth_middlewre
 
+from database.mongodb import collection
+
 ai_bp = Blueprint('ai_bp', __name__)
 
 @ai_bp.before_request
@@ -33,9 +35,11 @@ def get_users():
     llm = Chain()
 
     # extract it from authentication
-    user = g.user
+    authUser = g.user
+    user_id = authUser['user_id']
+    user = collection.find_one({"user_id": user_id}, {"_id": 0});
 
-    user_id = user["user_id"]
+    print("user details", user, user_id)
 
     # Validate the JSON body
     body = request.get_json()
