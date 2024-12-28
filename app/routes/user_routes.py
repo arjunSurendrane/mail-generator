@@ -1,10 +1,10 @@
 from crypt import methods
 
 from flask import Blueprint, g, jsonify, request
-from chromadb_client.portfolio import portfolio
-from middleware.auth_middleware import auth_middlewre
+from app.chromadb_client.portfolio import portfolio
+from app.middleware.auth_middleware import auth_middlewre
 
-from database.mongodb import collection
+from app.database.mongodb import collection
 
 user_bp = Blueprint('user_bp', __name__)
 
@@ -21,6 +21,7 @@ def get_users(user_id):
     response = collection.find_one({"user_id": user_id}, {"_id": 0});
     return jsonify({"message": "List of users", "respones": response});
 
+
 @user_bp.route('/login', methods=["post"])
 def login():
     body = request.get_json()
@@ -28,6 +29,7 @@ def login():
     response = collection.insert_one(user)
     print(response)
     return "Stroed user details into db"
+
 
 @user_bp.route('/onboarding', methods=['PUT'])
 def user_onboarding():
@@ -56,12 +58,11 @@ def user_onboarding():
     return "Stored user onboarded details into db", 200
 
 
-
 @user_bp.route('/project', methods=['put'])
 def update_project():
     body = request.get_json()
     user_id= "1"
-    project_link = body["link"]
+    project_link = body["link"]t
     project_stack = body["stack"]
 
     if not project_link and not project_stack:

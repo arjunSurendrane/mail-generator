@@ -1,7 +1,7 @@
 
 from flask import Flask, request, jsonify
-from routes.user_routes import user_bp
-from routes.ai import ai_bp
+from app.routes.user_routes import user_bp
+from app.routes.ai import ai_bp
 
 app = Flask(__name__)
 

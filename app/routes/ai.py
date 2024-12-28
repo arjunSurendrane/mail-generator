@@ -1,12 +1,12 @@
 from flask import Blueprint, g, jsonify, request
-from chromadb_client.portfolio import portfolio
+from app.chromadb_client.portfolio import portfolio
 from langchain_community.document_loaders import WebBaseLoader
 
-from chains import Chain
-from utils import clean_text
-from middleware.auth_middleware import auth_middlewre
+from app.chains import Chain
+from app.utils import clean_text
+from app.middleware.auth_middleware import auth_middlewre
 
-from database.mongodb import collection
+from app.database.mongodb import collection
 
 ai_bp = Blueprint('ai_bp', __name__)
 
